@@ -1,0 +1,12 @@
+<?php
+/*
+Copyright (c) 2025, ISPConfig LDAP Auth Contributors
+All rights reserved.
+*/
+
+// Turkish (Türkçe)
+$wb['LDAP Auth'] = 'LDAP Kimlik Doğrulama';
+$wb['ldap_enabled_txt'] = 'LDAP Kimlik Doğrulamayı Etkinleştir';
+$wb['ldap_domain_desc_txt'] = 'Bu alan adındaki kullanıcıların LDAP sunucusu üzerinden kimlik doğrulamasına izin verin. Etkinleştirildiğinde, harici LDAP kimlik doğrulama sunucusu (ispconfig_ldap_auth_server) bu alan adındaki kullanıcıları sorgulayabilir ve kimlik doğrulayabilir.';
+$wb['ldap_user_desc_txt'] = 'Bu kullanıcının LDAP sunucusu üzerinden kimlik doğrulamasına izin verin. Alan adının da LDAP kimlik doğrulaması etkinleştirilmiş olması gerekir. Etkinleştirildiğinde, bu kullanıcı harici LDAP kimlik doğrulama sunucusu (ispconfig_ldap_auth_server) üzerinden kimlik doğrulayabilir.';
+?>

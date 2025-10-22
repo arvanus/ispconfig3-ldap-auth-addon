@@ -21,6 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactored `mail_domain_edit()` to follow ISPConfig plugin best practices
 - Added hidden fields in `mail_domain_edit.htm` template with conditional rendering
 
+### Added
+- Complete translations for all 26 ISPConfig-supported languages
+- Arabic (ar), Bulgarian (bg), Brazilian Portuguese (br), Catalan (ca), Chinese (cn), Czech (cz), German (de), Danish (dk), Greek (el), English (en), Spanish (es), Finnish (fi), French (fr), Croatian (hr), Hungarian (hu), Indonesian (id), Italian (it), Japanese (ja), Dutch (nl), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Swedish (se), Slovak (sk), Turkish (tr)
+- All translations completed (AI-assisted, community review welcome)
+
 ## [1.0.0] - 2025-01-20
 
 ### Added

@@ -1,0 +1,12 @@
+<?php
+/*
+Copyright (c) 2025, ISPConfig LDAP Auth Contributors
+All rights reserved.
+*/
+
+// Polish (Polski)
+$wb['LDAP Auth'] = 'Uwierzytelnianie LDAP';
+$wb['ldap_enabled_txt'] = 'Włącz uwierzytelnianie LDAP';
+$wb['ldap_domain_desc_txt'] = 'Zezwól użytkownikom tej domeny na uwierzytelnianie przez serwer LDAP. Po włączeniu zewnętrzny serwer uwierzytelniania LDAP (ispconfig_ldap_auth_server) może odpytywać i uwierzytelniać użytkowników tej domeny.';
+$wb['ldap_user_desc_txt'] = 'Zezwól temu użytkownikowi na uwierzytelnianie przez serwer LDAP. Domena musi również mieć włączone uwierzytelnianie LDAP. Po włączeniu ten użytkownik może uwierzytelniać się przez zewnętrzny serwer uwierzytelniania LDAP (ispconfig_ldap_auth_server).';
+?>

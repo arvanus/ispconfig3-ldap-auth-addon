@@ -1,0 +1,12 @@
+<?php
+/*
+Copyright (c) 2025, ISPConfig LDAP Auth Contributors
+All rights reserved.
+*/
+
+// Arabic (العربية)
+$wb['LDAP Auth'] = 'مصادقة LDAP';
+$wb['ldap_enabled_txt'] = 'تمكين مصادقة LDAP';
+$wb['ldap_domain_desc_txt'] = 'السماح للمستخدمين من هذا المجال بالمصادقة عبر خادم LDAP. عند التمكين، يمكن لخادم المصادقة الخارجي LDAP (ispconfig_ldap_auth_server) الاستعلام عن مستخدمي هذا المجال والمصادقة عليهم.';
+$wb['ldap_user_desc_txt'] = 'السماح لهذا المستخدم بالمصادقة عبر خادم LDAP. يجب أن يكون لدى المجال أيضًا مصادقة LDAP ممكنة. عند التمكين، يمكن لهذا المستخدم المصادقة من خلال خادم المصادقة الخارجي LDAP (ispconfig_ldap_auth_server).';
+?>

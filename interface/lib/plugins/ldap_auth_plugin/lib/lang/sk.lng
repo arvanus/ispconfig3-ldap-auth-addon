@@ -1,0 +1,12 @@
+<?php
+/*
+Copyright (c) 2025, ISPConfig LDAP Auth Contributors
+All rights reserved.
+*/
+
+// Slovak (Slovenčina)
+$wb['LDAP Auth'] = 'LDAP autentifikácia';
+$wb['ldap_enabled_txt'] = 'Povoliť LDAP autentifikáciu';
+$wb['ldap_domain_desc_txt'] = 'Povoliť používateľom tejto domény autentifikáciu cez LDAP server. Po povolení môže externý LDAP autentifikačný server (ispconfig_ldap_auth_server) dopytovať a autentifikovať používateľov tejto domény.';
+$wb['ldap_user_desc_txt'] = 'Povoliť tomuto používateľovi autentifikáciu cez LDAP server. Doména musí mať tiež povolenú LDAP autentifikáciu. Po povolení sa tento používateľ môže autentifikovať cez externý LDAP autentifikačný server (ispconfig_ldap_auth_server).';
+?>

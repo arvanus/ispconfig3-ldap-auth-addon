@@ -2,7 +2,7 @@
 
 Adds LDAP authentication capability to ISPConfig 3 mail domains and mailboxes. This plugin allows you to mark which domains and users can authenticate via an external LDAP server.
 
-**Important:** This plugin only adds the control fields to ISPConfig. The actual LDAP authentication is handled by a separate server component: [ispconfig_ldap_auth_server](https://github.com/seu-usuario/ispconfig_ldap_auth_server)
+**Important:** This plugin only adds the control fields to ISPConfig. The actual LDAP authentication is handled by a separate server component: [ispconfig_ldap_auth_server](https://github.com/arvanus/ispconfig_ldap_auth_server)
 
 ## Features
 
@@ -13,7 +13,7 @@ Adds LDAP authentication capability to ISPConfig 3 mail domains and mailboxes. T
 - ✅ Automatic database schema updates (no manual SQL required)
 - ✅ Zero modification of ISPConfig core files
 - ✅ Easy installation and update
-- ✅ Multilingual support (English and Portuguese included)
+- ✅ Multilingual support for all ISPConfig languages (26 languages)
 
 ## Requirements
 
@@ -46,7 +46,7 @@ EXIT;
 ```bash
 # Clone the repository
 cd /tmp
-git clone https://github.com/seu-usuario/ispconfig3-ldap-auth-addon.git
+git clone https://github.com/arvanus/ispconfig3-ldap-auth-addon.git
 cd ispconfig3-ldap-auth-addon
 
 # Copy files to ISPConfig
@@ -65,9 +65,27 @@ rm -rf ispconfig3-ldap-auth-addon
 **Important:** You MUST logout and login again to ISPConfig for the plugin to load!
 
 The plugin will automatically:
-- Create `ldap_enabled` column in `mail_domain` table
-- Create `ldap_enabled` column in `mail_user` table
+- Create `ldap_enabled` column in `mail_domain` table (default `'n'` for existing domains)
+- Create `ldap_enabled` column in `mail_user` table (default `'y'` for new users and existing users)
 - Register itself with ISPConfig's plugin system
+
+### What Happens to Existing Records?
+
+When you install the plugin:
+- **Existing domains:** Will have `ldap_enabled = 'n'` (disabled) - you need to manually enable
+- **Existing mailboxes:** Will have `ldap_enabled = 'y'` (enabled) - you need to manually disable
+- **New domains (after install):** Will have `ldap_enabled = 'n'` (disabled by default)
+- **New mailboxes (after install):** Will have `ldap_enabled = 'y'` (enabled by default)
+
+If you want to enable LDAP for all existing users in a domain, you can run:
+```sql
+-- Enable LDAP for all users in example.com
+UPDATE mail_user mu
+JOIN mail_domain md ON mu.email LIKE CONCAT('%@', md.domain)
+SET mu.ldap_enabled = 'y'
+WHERE md.domain = 'example.com'
+  AND mu.postfix = 'y';
+```
 
 ### Step 4: Verify Installation
 
@@ -95,13 +113,18 @@ The plugin will automatically:
 
 **Note:** For a user to authenticate via LDAP, BOTH the domain AND the user must have LDAP enabled.
 
+**Default Behavior (v1.0.1+):**
+- New mailboxes have LDAP **enabled by default** (checkbox checked)
+- New domains have LDAP **disabled by default** (checkbox unchecked)
+- This means you typically only need to enable LDAP at the domain level
+
 ## Update
 
 Updating is the same as installation:
 
 ```bash
 cd /tmp
-git clone https://github.com/seu-usuario/ispconfig3-ldap-auth-addon.git
+git clone https://github.com/arvanus/ispconfig3-ldap-auth-addon.git
 cd ispconfig3-ldap-auth-addon
 cp -R interface /usr/local/ispconfig
 chown -R ispconfig:ispconfig /usr/local/ispconfig/interface/lib
@@ -131,7 +154,7 @@ ALTER TABLE mail_user DROP COLUMN ldap_enabled;
 
 This plugin only manages the configuration fields in ISPConfig. To actually authenticate users via LDAP, you need to set up the companion server:
 
-👉 **[ispconfig_ldap_auth_server](https://github.com/seu-usuario/ispconfig_ldap_auth_server)**
+👉 **[ispconfig_ldap_auth_server](https://github.com/arvanus/ispconfig_ldap_auth_server)**
 
 See [INTEGRATION.md](docs/INTEGRATION.md) for SQL queries and integration details.
 
@@ -146,8 +169,20 @@ ldap_enabled ENUM('n','y') NOT NULL DEFAULT 'n'
 
 ### `mail_user` table
 ```sql
-ldap_enabled ENUM('n','y') NOT NULL DEFAULT 'n'
+ldap_enabled ENUM('n','y') NOT NULL DEFAULT 'y'
 ```
+
+**Note:** As of version 1.0.1, new mailboxes have LDAP authentication **enabled by default**. This provides better UX - admins only need to enable LDAP at the domain level.
+
+## Supported Languages
+
+The plugin includes translations for all ISPConfig-supported languages:
+
+Arabic (ar), Bulgarian (bg), Brazilian Portuguese (br), Catalan (ca), Chinese (cn), Czech (cz), German (de), Danish (dk), Greek (el), English (en), Spanish (es), Finnish (fi), French (fr), Croatian (hr), Hungarian (hu), Indonesian (id), Italian (it), Japanese (ja), Dutch (nl), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Swedish (se), Slovak (sk), Turkish (tr)
+
+**All 26 languages are fully translated!**
+
+Translations provided via AI and may need review by native speakers. Community contributions to improve translations are welcome via pull requests.
 
 ## File Structure
 
@@ -166,8 +201,32 @@ interface/
             │   └── mail_user_edit.htm      # User tab template
             └── lib/
                 └── lang/
-                    ├── en.lng              # English translations
-                    └── pt.lng              # Portuguese translations
+                    ├── ar.lng              # Arabic
+                    ├── bg.lng              # Bulgarian
+                    ├── br.lng              # Brazilian Portuguese
+                    ├── ca.lng              # Catalan
+                    ├── cn.lng              # Chinese
+                    ├── cz.lng              # Czech
+                    ├── de.lng              # German
+                    ├── dk.lng              # Danish
+                    ├── el.lng              # Greek
+                    ├── en.lng              # English
+                    ├── es.lng              # Spanish
+                    ├── fi.lng              # Finnish
+                    ├── fr.lng              # French
+                    ├── hr.lng              # Croatian
+                    ├── hu.lng              # Hungarian
+                    ├── id.lng              # Indonesian
+                    ├── it.lng              # Italian
+                    ├── ja.lng              # Japanese
+                    ├── nl.lng              # Dutch
+                    ├── pl.lng              # Polish
+                    ├── pt.lng              # Portuguese
+                    ├── ro.lng              # Romanian
+                    ├── ru.lng              # Russian
+                    ├── se.lng              # Swedish
+                    ├── sk.lng              # Slovak
+                    └── tr.lng              # Turkish
 ```
 
 ## Troubleshooting
@@ -214,14 +273,21 @@ BSD License - See [LICENSE](LICENSE) file for details.
 ## Credits
 
 - Inspired by [ISPConfig Nextcloud Plugin](https://github.com/mediabox-cl/ispconfig-nextcloud-plugin)
-- Built for integration with [ispconfig_ldap_auth_server](https://github.com/seu-usuario/ispconfig_ldap_auth_server)
+- Built for integration with [ispconfig_ldap_auth_server](https://github.com/arvanus/ispconfig_ldap_auth_server)
 
 ## Support
 
-- Issues: https://github.com/seu-usuario/ispconfig3-ldap-auth-addon/issues
+- Issues: https://github.com/arvanus/ispconfig3-ldap-auth-addon/issues
 - ISPConfig Forum: https://www.howtoforge.com/community/forums/ispconfig-3-development.77/
 
 ## Version History
+
+### 1.0.1 (2025-01-21)
+- **Fixed:** "The Server can not be changed" error when saving mail domain from LDAP Auth tab
+- **Changed:** `mail_user.ldap_enabled` default from `'n'` to `'y'` (enabled by default)
+- **Changed:** Mailbox form checkbox now checked by default
+- **Improved:** Template-based field preservation using `setVar()` + conditional hidden fields
+- **Technical:** Solution based on `nextcloud_plugin` implementation pattern
 
 ### 1.0.0 (2025-01-20)
 - Initial release
@@ -229,4 +295,3 @@ BSD License - See [LICENSE](LICENSE) file for details.
 - LDAP enable/disable for mailboxes
 - Automatic database schema updates
 - English and Portuguese translations
-# TEST - versão $(cat interface/lib/plugins/ldap_auth_plugin/VERSION)

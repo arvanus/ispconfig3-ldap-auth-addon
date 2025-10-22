@@ -1,0 +1,12 @@
+<?php
+/*
+Copyright (c) 2025, ISPConfig LDAP Auth Contributors  
+All rights reserved.
+*/
+
+// Italian (Italiano)
+$wb['LDAP Auth'] = 'Autenticazione LDAP';
+$wb['ldap_enabled_txt'] = 'Abilita autenticazione LDAP';
+$wb['ldap_domain_desc_txt'] = 'Consenti agli utenti di questo dominio di autenticarsi tramite server LDAP. Quando abilitato, il server esterno di autenticazione LDAP (ispconfig_ldap_auth_server) può interrogare e autenticare gli utenti di questo dominio.';
+$wb['ldap_user_desc_txt'] = 'Consenti a questo utente di autenticarsi tramite server LDAP. Anche il dominio deve avere l\'autenticazione LDAP abilitata. Quando abilitato, questo utente può autenticarsi tramite il server esterno di autenticazione LDAP (ispconfig_ldap_auth_server).';
+?>

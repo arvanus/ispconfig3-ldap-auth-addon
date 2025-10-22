@@ -17,8 +17,10 @@ ldap_enabled ENUM('n','y') NOT NULL DEFAULT 'n'
 
 ### `mail_user` table
 ```sql
-ldap_enabled ENUM('n','y') NOT NULL DEFAULT 'n'
+ldap_enabled ENUM('n','y') NOT NULL DEFAULT 'y'
 ```
+
+**Note:** As of version 1.0.1, new mailboxes have LDAP authentication enabled by default. This provides a better user experience where admins only need to enable LDAP at the domain level to allow all users to authenticate.
 
 ## Authentication Logic
 
@@ -387,6 +389,6 @@ WHERE mu.email = 'test@example.com';
 ## Support
 
 For issues with:
-- **ISPConfig LDAP Auth Addon:** https://github.com/seu-usuario/ispconfig3-ldap-auth-addon/issues
-- **ispconfig_ldap_auth_server:** https://github.com/seu-usuario/ispconfig_ldap_auth_server/issues
+- **ISPConfig LDAP Auth Addon:** https://github.com/arvanus/ispconfig3-ldap-auth-addon/issues
+- **ispconfig_ldap_auth_server:** https://github.com/arvanus/ispconfig_ldap_auth_server/issues
 - **ISPConfig itself:** https://www.howtoforge.com/community/forums/ispconfig-3-support.60/

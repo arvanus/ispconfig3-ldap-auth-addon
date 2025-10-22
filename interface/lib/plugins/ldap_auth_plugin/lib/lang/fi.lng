@@ -1,0 +1,12 @@
+<?php
+/*
+Copyright (c) 2025, ISPConfig LDAP Auth Contributors
+All rights reserved.
+*/
+
+// Finnish (Suomi)
+$wb['LDAP Auth'] = 'LDAP-todennus';
+$wb['ldap_enabled_txt'] = 'Ota LDAP-todennus käyttöön';
+$wb['ldap_domain_desc_txt'] = 'Salli tämän verkkotunnuksen käyttäjien todentautuminen LDAP-palvelimen kautta. Kun käytössä, ulkoinen LDAP-todennuspalvelin (ispconfig_ldap_auth_server) voi kysellä ja todentaa tämän verkkotunnuksen käyttäjiä.';
+$wb['ldap_user_desc_txt'] = 'Salli tämän käyttäjän todentautuminen LDAP-palvelimen kautta. Verkkotunnuksella on myös oltava LDAP-todennus käytössä. Kun käytössä, tämä käyttäjä voi todentautua ulkoisen LDAP-todennuspalvelimen (ispconfig_ldap_auth_server) kautta.';
+?>

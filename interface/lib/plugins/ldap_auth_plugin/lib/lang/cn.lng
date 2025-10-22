@@ -1,0 +1,12 @@
+<?php
+/*
+Copyright (c) 2025, ISPConfig LDAP Auth Contributors
+All rights reserved.
+*/
+
+// Chinese (中文)
+$wb['LDAP Auth'] = 'LDAP认证';
+$wb['ldap_enabled_txt'] = '启用LDAP认证';
+$wb['ldap_domain_desc_txt'] = '允许此域的用户通过LDAP服务器进行身份验证。启用后，外部LDAP身份验证服务器（ispconfig_ldap_auth_server）可以查询和验证此域的用户。';
+$wb['ldap_user_desc_txt'] = '允许此用户通过LDAP服务器进行身份验证。域还必须启用LDAP身份验证。启用后，此用户可以通过外部LDAP身份验证服务器（ispconfig_ldap_auth_server）进行身份验证。';
+?>
