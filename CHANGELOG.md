@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-01-21
+
+### Fixed
+- Fixed "The Server can not be changed" error when saving mail domain from LDAP Auth tab
+- Implemented template-based field preservation using `setVar()` + conditional hidden fields
+- Solution based on `nextcloud_plugin` implementation pattern
+- `mail_domain_edit()` now sets template variables for critical fields (server_id, domain, policy, etc.)
+- Template uses conditional `tmpl_if` blocks to restore hidden fields only when values exist
+
+### Changed
+- Changed `mail_user.ldap_enabled` default from `'n'` to `'y'` (enabled by default for new users)
+- Changed form default for mail_user to checked (enabled)
+- `mail_domain.ldap_enabled` remains default `'n'` (disabled by default for new domains)
+- Refactored `mail_domain_edit()` to follow ISPConfig plugin best practices
+- Added hidden fields in `mail_domain_edit.htm` template with conditional rendering
+
 ## [1.0.0] - 2025-01-20
 
 ### Added

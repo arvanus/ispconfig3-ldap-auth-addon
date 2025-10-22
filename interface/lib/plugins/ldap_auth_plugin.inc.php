@@ -67,6 +67,10 @@ class ldap_auth_plugin {
 		// Check and create database columns if needed
 		$this->checkTables();
 
+		// Register events for domain form HACK (mail domain form doesn't support tabs properly)
+		$app->plugin->registerEvent('mail:mail_domain:on_before_insert', $this->plugin_name, 'mail_domain_edit');
+		$app->plugin->registerEvent('mail:mail_domain:on_before_update', $this->plugin_name, 'mail_domain_edit');
+
 		// Register events to inject fields into forms
 		$app->plugin->registerEvent('mail:mail_domain:on_after_formdef', $this->plugin_name, 'mail_domain_form');
 		$app->plugin->registerEvent('mail:mail_domain:on_remote_after_formdef', $this->plugin_name, 'mail_domain_form');
@@ -111,6 +115,77 @@ class ldap_auth_plugin {
 			if($sql) {
 				$app->db->query($sql);
 			}
+		}
+	}
+
+	/**
+	 * HACK: Restore missing form data for mail domain
+	 * Mail domain form in ISPConfig doesn't properly support tabs.
+	 * When saving from LDAP Auth tab, it only sends ldap_enabled field.
+	 * This function sets template variables so hidden fields can restore the values.
+	 * Based on nextcloud_plugin implementation.
+	 *
+	 * @param string $event_name Event name (on_before_insert or on_before_update)
+	 * @param object $page_form Form object
+	 * @return void
+	 */
+	function mail_domain_edit($event_name, $page_form) {
+		global $app;
+
+		// HACK: This is needed because the mail domain form in ISPConfig
+		// isn't prepared to use TABS properly :(
+		// Solution based on nextcloud_plugin implementation
+
+		// We need to set this because from our tab to the domain tab it
+		// needs the domain ID from $_GET and this is a POST.
+		if(isset($page_form->dataRecord['id'])) {
+			if(!isset($_GET['id'])) {
+				$_GET['id'] = $page_form->dataRecord['id'];
+			}
+		}
+
+		// Restore vars in the template so hidden fields can use them
+		if(isset($page_form->dataRecord)) {
+			$app->tpl->setVar(
+				'server_value',
+				($page_form->dataRecord['server_id'] ?? ''),
+				true
+			);
+			$app->tpl->setVar(
+				'domain_value',
+				($page_form->dataRecord['domain'] ?? ''),
+				true
+			);
+			$app->tpl->setVar(
+				'policy_value',
+				($page_form->dataRecord['policy'] ?? ''),
+				true
+			);
+			$app->tpl->setVar(
+				'active_value',
+				($page_form->dataRecord['active'] ?? ''),
+				true
+			);
+			$app->tpl->setVar(
+				'dkim_value',
+				($page_form->dataRecord['dkim'] ?? ''),
+				true
+			);
+			$app->tpl->setVar(
+				'dkim_private_value',
+				($page_form->dataRecord['dkim_private'] ?? ''),
+				true
+			);
+			$app->tpl->setVar(
+				'dkim_public_value',
+				($page_form->dataRecord['dkim_public'] ?? ''),
+				true
+			);
+			$app->tpl->setVar(
+				'dkim_selector_value',
+				($page_form->dataRecord['dkim_selector'] ?? ''),
+				true
+			);
 		}
 	}
 
@@ -162,7 +237,7 @@ class ldap_auth_plugin {
 					'ldap_enabled' => array(
 						'datatype' => 'VARCHAR',
 						'formtype' => 'CHECKBOX',
-						'default' => 'n',
+						'default' => 'y',
 						'value' => array(1 => 'y', 0 => 'n')
 					)
 				)

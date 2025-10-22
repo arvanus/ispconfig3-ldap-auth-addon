@@ -13,6 +13,32 @@
 <input type="hidden" name="id" value="{tmpl_var name='id'}">
 <input type="hidden" name="type" value="local">
 
+<!-- Restore critical fields that aren't in this tab -->
+<tmpl_if name='server_value' op="!=" value="">
+	<input type="hidden" name="server_id" value="{tmpl_var name='server_value'}"/>
+</tmpl_if>
+<tmpl_if name='domain_value' op="!=" value="">
+	<input type="hidden" name="domain" value="{tmpl_var name='domain_value'}"/>
+</tmpl_if>
+<tmpl_if name='policy_value' op="!=" value="">
+	<input type="hidden" name="policy" value="{tmpl_var name='policy_value'}"/>
+</tmpl_if>
+<tmpl_if name='active_value' op="!=" value="">
+	<input type="hidden" name="active" value="{tmpl_var name='active_value'}"/>
+</tmpl_if>
+<tmpl_if name='dkim_value' op="!=" value="">
+	<input type="hidden" name="dkim" value="{tmpl_var name='dkim_value'}"/>
+</tmpl_if>
+<tmpl_if name='dkim_selector_value' op="!=" value="">
+	<input type="hidden" name="dkim_selector" value="{tmpl_var name='dkim_selector_value'}"/>
+</tmpl_if>
+<tmpl_if name='dkim_private_value' op="!=" value="">
+	<input type="hidden" name="dkim_private" value="{tmpl_var name='dkim_private_value'}"/>
+</tmpl_if>
+<tmpl_if name='dkim_public_value' op="!=" value="">
+	<input type="hidden" name="dkim_public" value="{tmpl_var name='dkim_public_value'}"/>
+</tmpl_if>
+
 <div class="clear">
 	<tmpl_if name='id'>
 		<tmpl_if name='show_delete_on_forms' op="==" value="y">

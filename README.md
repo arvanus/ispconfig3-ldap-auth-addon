@@ -229,3 +229,4 @@ BSD License - See [LICENSE](LICENSE) file for details.
 - LDAP enable/disable for mailboxes
 - Automatic database schema updates
 - English and Portuguese translations
+# TEST - versão $(cat interface/lib/plugins/ldap_auth_plugin/VERSION)
